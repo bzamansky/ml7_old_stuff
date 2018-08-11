@@ -1,0 +1,119 @@
+object BankAccount {
+
+class BankAccount(f: String, l: String, n: Int, b: Double, p: String){
+
+
+       var firstn = ""
+       var lastn = ""
+       var act = 0
+       var bal = 0.0
+       var pin = ""
+       var authentication = false
+       var numTrans = 0
+
+
+
+       def setInstanceVars(f: String,l: String, n: Int, b: Double, p: String){
+       	  firstn = f
+  	  lastn = l
+ 	  act = n
+  	  bal = b
+  	  pin = p
+       }
+
+
+       def setName(first: String, last: String){
+       	  firstn = first
+  	  lastn = last
+       }
+
+
+       def setActNum(account: Int){
+       	  act = account
+       }
+
+       def setBalance(balance: Double){
+       	  bal = balance
+       }
+
+       def setPin(p: String){
+       	  pin = p
+       }
+
+
+   //    def this() = this("","",0,0,"0")
+       
+
+
+       def this(first: String, last: String, act: Int) =  this(first,last,act,0,"0")
+       
+
+
+       //def this(first: String, last: String, act: Int, bal: Double, p: String) = this(first,last,act,bal,p)
+       
+
+
+       def authenticate(p: String){
+       	  if (pin == p){
+     	     authentication = true
+          }
+  	  else{
+		println("Access Denied")
+       	  }
+       }
+
+
+       def logout(){
+       	  val authentication = false
+       }
+
+       def deposit (amt: Double) { 
+       	  if (authentication == true){
+     	     bal = bal + amt
+   	  }
+  	  else {
+  	       println("You do not have permission.")
+  	  }
+       }
+
+       def withdraw (amt: Double){
+       	   if (authentication == true){
+       	      if (bal >= amt){
+       	      	 bal = bal-amt;
+       	      }
+       	      else { 
+              	   println("Insufficient funds");
+       	      }
+       	   }
+       	   else { 
+   	   	println("You do not have permission.");
+   	   }
+       }
+
+       def makeString(): String = "Name: " + "firstn" + "lastn" + "Account:" + "act" + "Balance: $" + bal
+
+
+/*
+def transfer (b: BankAccount, amt: Double) {
+   if (bal >= amt){
+      withdraw(amt);
+      b.deposit(amt);
+   }
+   else{
+       println("You may not give away more money than you possess.")
+   }
+}
+*/
+
+
+}
+
+def main(args: Array[String]) {
+   val a = new BankAccount()
+       val b = new BankAccount("Lisa", "Bee", 123)
+   a.setInstanceVars("Bob","Lee", 1223, 12.32, "pin")
+   println(a.firstn)
+   println(b.firstn)
+}
+
+}
